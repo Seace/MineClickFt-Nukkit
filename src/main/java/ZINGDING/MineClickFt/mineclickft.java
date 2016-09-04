@@ -23,8 +23,7 @@ public class mineclickft extends PluginBase implements Listener {
 public void playerInteract(PlayerInteractEvent event) {
 if(event.getBlock ().getId () == 35 || event.getBlock ().getId () == 246) {
 	
-	Random rand = new Random();
-	int randomInteger = rand.nextInt(10);
+	int randomInteger = new Random().nextInt(10);
 	
 	if (randomInteger == 10){
 		this.getServer ().getDefaultLevel ().setBlock (new Vector3 (event.getBlock ().x, event.getBlock (). y, event.getBlock (). z), Block.get(246));
