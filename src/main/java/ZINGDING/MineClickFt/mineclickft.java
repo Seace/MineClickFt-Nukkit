@@ -5,35 +5,36 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.plugin.PluginBase;
-
-import java.util.Random;
-
-import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.potion.Effect;
+
+import java.util.Random;
 
 public class mineclickft extends PluginBase implements Listener {
 	public void onLoad() {
 		this.getLogger().info("§3✿ MineClickft on Loading! ✿");
-}
+	}
 
-public void onEnable() {
- this.getLogger().info("§3✿ MineClickft on Enable! ✿");
- this.getServer ().getPluginManager ().registerEvents ( this, this );
-}
+	public void onEnable() {
+		this.getLogger().info("§3✿ MineClickft on Enable! ✿");
+		this.getServer().getPluginManager().registerEvents(this, this);
+	}
 
 public void playerInteract(PlayerInteractEvent event) {
 if(event.getBlock ().getId () == 35 || event.getBlock ().getId () == 246) {
 	
 	Random rand = new Random();
-	int randomInteger = rand.nextInt(16);
+	int randomInteger = rand.nextInt(10);
 	
-	if (randomInteger == 16){
+	if (randomInteger == 10){
 		this.getServer ().getDefaultLevel ().setBlock (new Vector3 (event.getBlock ().x, event.getBlock (). y, event.getBlock (). z), Block.get(246));
-		return;
 	}
-	this.getServer ().getDefaultLevel ().getBlock (new Vector3 (event.getBlock ().x, event.getBlock (). y, event.getBlock (). z));
+ if(!(randomInteger == 10))
+	{
+	this.getServer ().getDefaultLevel ().setBlock (new Vector3 (event.getBlock ().x, event.getBlock (). y, event.getBlock (). z), event.getBlock());
 	}
+}
+
 	if(event.getBlock ().getId () == 246 && event.getBlock ().getDamage () == 0) {
 		 event.getPlayer().sendMessage("§3[ MineClickft ] You found a coin! [§a+§31]");
 		 event.getPlayer().getInventory().addItem(new Item(341, 0, 1));
@@ -55,7 +56,7 @@ if(event.getBlock ().getId () == 35 || event.getBlock ().getId () == 246) {
      if(!event.getPlayer().getInventory().contains(Item.get(341, 0, 20))) {
        event.getPlayer().sendMessage("§c[ MineClickft ] You don't have enough Coins!");
        return;
-    }
+     }
 				else {
     event.getPlayer().getInventory().removeItem(new Item(341, 0, 20));
     event.getPlayer().getInventory().addItem(new Item(272, 0, 1));
